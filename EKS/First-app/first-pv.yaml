@@ -1,0 +1,12 @@
+# PV = PERSISTENT VOLUME/VOLUME PERSISTENT
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: first-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce # Leitura e Escrita uma vez
+  hostPath: # Tipo de Disco
+    path: "/tmp/data"

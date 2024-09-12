@@ -1,0 +1,26 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: eksctl-cluster1
+  region: us-east-1
+
+iam: 
+  serviceRoleARN: arn:aws:iam::684145503573:role/LabRole
+
+vpc: 
+  id: vpc-069b6af28d893d8a3
+  cidr: 172.31.0.0/16
+  subnets: 
+    public:
+      us-east-1a:
+        id: subnet-0ae0aa8c25ee68998
+      us-east-1b:
+        id: set-0b33ubn2a117f76893c2
+
+nodeGroups: 
+  - name: ndg-2
+    instanceType: t2.micro
+    desiredCapacity: 1
+    iam: 
+      instanceRoleARN: arn:aws:iam::684145503573:instance-profile/LabInstanceProfile
+    privateNetworking: false

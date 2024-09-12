@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: first-dp
+  namespace: default
+  labels:
+    testapp: "yes"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      testapp: "yes"
+  template:
+    metadata:
+      labels:
+        testapp: "yes"
+    spec:
+      containers:
+        - name: milkshake
+          image: nginx
+          envFrom:
+            - configMapRef:
+                name: first-cfg
+            - secretRef:
+                name: first-sec
+          volumeMounts:
+            - mountPath: /teste/
+              name: first-pvc
+      volumes:
+        - name: first-pvc
+          persistentVolumeClaim:
+            claimName: first-pvc
